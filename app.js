@@ -1,9 +1,31 @@
 const express      = require('express'),
 bodyParser         = require('body-parser'),
 mongoose           = require('mongoose'),
+routes             = require('./routes/routes'),
 session            = require('express-session'),
 app                = express(),
 port               = process.env.PORT || 3000;
+
+// CONFIG SESSION
+app.use(session({
+    secret: 'Shauritanga loves you all',
+    resave: false,
+    saveUninitialized: false
+}));
+
+//CONFIG APP
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
+
+// CONNECTING TO DB
+mongoose.connect('mongodb://ashauritanga:athanas2015@ds027348.mlab.com:27348/app', {useNewUrlParser: true, useCreateIndex: true})
+        .then(() => console.log('Connected'))
+        .catch(err => console.log(err));
+
+
+//CONFIG ROUES
+app.use('/', routes);
 
 
 
