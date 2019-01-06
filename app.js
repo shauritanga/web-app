@@ -39,15 +39,7 @@ mongoose.connect('mongodb://ashauritanga:athanas2015@ds027348.mlab.com:27348/app
 app.use('/', routes);
 
 
-
-
-
-
-
-
-
-
-
+//LISTENING ON PORT
 app.listen(port, function() {
     console.log(`Server is running on port ${port}`)
 });
