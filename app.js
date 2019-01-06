@@ -1,6 +1,7 @@
 const express      = require('express'),
 bodyParser         = require('body-parser'),
 mongoose           = require('mongoose'),
+User               = require('./models/user'),
 routes             = require('./routes/routes'),
 session            = require('express-session'),
 app                = express(),
@@ -23,7 +24,17 @@ mongoose.connect('mongodb://ashauritanga:athanas2015@ds027348.mlab.com:27348/app
         .then(() => console.log('Connected'))
         .catch(err => console.log(err));
 
-
+//CREATING USER
+// User.create({
+//     username: 'ashauritanga',
+//     password: 'athanas2015'
+// }, function(err, user) {
+//     if(err) {
+//         console.log(err);
+//     }else{
+//         console.log(user);
+//     }
+// })
 //CONFIG ROUES
 app.use('/', routes);
 
