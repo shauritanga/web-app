@@ -2,6 +2,19 @@
         <div class="jumbotron">
             <h1>Welcome to the site</h1>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="../images/emit.jpg" alt="">
+                </div>
+                <div class="col-md-9">
+                    <% posts.forEach(function(post) { %>   
+                        <h4><%= post.title %></h4>
+                        <p><%= post.body %></p>
+                   <% });  %>
+                </div>
+            </div>
+        </div>
 <% include ./partials/footer %>
 
         

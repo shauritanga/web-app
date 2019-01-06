@@ -1,6 +1,8 @@
 const express      = require('express'),
 bodyParser         = require('body-parser'),
 mongoose           = require('mongoose'),
+passport           = require('passport'),
+LocalStrategy      = require('passport-local'),
 User               = require('./models/user'),
 routes             = require('./routes/routes'),
 session            = require('express-session'),
@@ -14,6 +16,11 @@ app.use(session({
     saveUninitialized: false
 }));
 
+// PASSPORT CONFIGURATION
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //CONFIG APP
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
@@ -24,27 +31,13 @@ mongoose.connect('mongodb://ashauritanga:athanas2015@ds027348.mlab.com:27348/app
         .then(() => console.log('Connected'))
         .catch(err => console.log(err));
 
-//CREATING USER
-// User.create({
-//     username: 'ashauritanga',
-//     password: 'athanas2015'
-// }, function(err, user) {
-//     if(err) {
-//         console.log(err);
-//     }else{
-//         console.log(user);
-//     }
-// })
+
 //CONFIG ROUES
 app.use('/', routes);
+
 
 
 //LISTENING ON PORT
 app.listen(port, function() {
     console.log(`Server is running on port ${port}`)
 });
-
-
-
-
-
