@@ -2,8 +2,30 @@ const mongoose = require('mongoose');
 
 
 const userSchema = new mongoose.Schema({
-    username: String,
-    password: String
+    fisrtName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    lastName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
+    password: {
+        type: String,
+        required: true
+    }
 });
 
 
