@@ -25,7 +25,7 @@ router.get('/posts/new', function(req, res, next) {
     res.render('new',{ title: 'Create post'})
 });
 
-router.post('/posts');
+router.post('/posts'); 
 
 router.get('/register', function(req, res, next) {
     res.render('register', {

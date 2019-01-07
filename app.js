@@ -21,10 +21,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
-// CONNECTING TO DB
-mongoose.connect('mongodb://ashauritanga:athanas2015@ds027348.mlab.com:27348/app', {useNewUrlParser: true, useCreateIndex: true})
-        .then(() => console.log('Connected'))
-        .catch(err => console.log(err));
+// CONNCTING TO DB
+mongoose.connect('mongodb://localhost:27017/app');
 
 
 //CONFIG ROUES
