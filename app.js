@@ -1,8 +1,6 @@
 const express      = require('express'),
 bodyParser         = require('body-parser'),
 mongoose           = require('mongoose'),
-passport           = require('passport'),
-LocalStrategy      = require('passport-local'),
 User               = require('./models/user'),
 routes             = require('./routes/routes'),
 session            = require('express-session'),
@@ -17,9 +15,6 @@ app.use(session({
 }));
 
 // PASSPORT CONFIGURATION
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 //CONFIG APP
 app.use(bodyParser.urlencoded({extended: true}));
