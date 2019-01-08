@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 
 const postSchema = new mongoose.Schema({
@@ -9,6 +9,13 @@ const postSchema = new mongoose.Schema({
     body: {
         type: String,
         required: true
+    },
+    author: {
+        id : {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        username:String
     }
 });
 
