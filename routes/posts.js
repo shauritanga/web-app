@@ -72,6 +72,7 @@ router.get('/:id', function(req, res, next) {
         }
         res.render('posts/show', {
             title: post.title,
+            path: '/posts/:id',
             post
         })
     }); 
