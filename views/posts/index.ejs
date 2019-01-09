@@ -7,11 +7,10 @@
                 <div class="col-md-9">
                     <% posts.forEach(function(post) { %>   
                         <h4><%= post.title %></h4>
-                        <p><%= post.body.substring(0, 200) %></p>
+                        <p><%- post.body.substring(0, 200) %></p>
                         <a href="/posts/<%= post._id %>" class="btn btn-primary">Read</a>
                    <% });  %>
                 </div>
-                
             </div>
         </div>
 <% include ../partials/footer %>

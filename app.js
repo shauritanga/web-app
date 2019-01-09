@@ -30,7 +30,8 @@ mongoose.connect('mongodb://localhost:27017/app', {useNewUrlParser: true, useCre
 //landing page
 app.get('/', function(req, res) {
     res.render('index', {
-        title: 'Home'
+        title: 'Home',
+        path: '/'
     })
 })
 //CONFIG ROUES

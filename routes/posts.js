@@ -11,8 +11,9 @@ router.get('/', function(req, res, next) {
             return next(error);
         }
         res.render('posts/index', {
-            title: 'Home',
-            posts
+            title: 'Posts',
+            posts,
+            path: '/posts'
         });
     });
 });

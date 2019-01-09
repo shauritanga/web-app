@@ -11,7 +11,8 @@ router.get('/profile', function(req, res) {
 //GET register form
 router.get('/new', function(req, res) {
     res.render('users/new', {
-        title: 'Sign Up'
+        title: 'Sign Up',
+        path: '/users/new'
     })
 });
 
@@ -54,7 +55,8 @@ router.post('/', function(req, res, next) {
 //GET login form
 router.get('/login', function(req, res) {
     res.render('users/login', {
-        title: 'login'
+        title: 'login',
+        path: '/users/login'
     });
 });
 
