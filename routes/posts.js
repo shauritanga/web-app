@@ -36,6 +36,7 @@ router.get('/:id/edit', function(req, res, next) {
         }
         res.render('posts/edit', {
             title: 'Edit post',
+            path: '/posts/:id/edit',
             post
         });
     });  
