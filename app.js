@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 })
 //CONFIG ROUES
 app.use('/users', userRoutes);
-app.use('/posts/:id/comments', commentRoutes);
+app.use(commentRoutes);
 app.use('/posts', postRoutes);
 
 

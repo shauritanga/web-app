@@ -1,5 +1,5 @@
 const express      = require('express'),
-      User         = require('../models/user'),
+      Comment      = require('../models/comment'), 
       Post         = require('../models/post'),
       router       = express.Router();
 
@@ -66,16 +66,19 @@ router.delete('/:id', function(req, res, next) {
 
 //SHOW ROUTE
 router.get('/:id', function(req, res, next) {
-    Post.findById(req.params.id, function(err, post) {
-        if(err) {
-            return res.redirect('/posts')
-        }
-        res.render('posts/show', {
-            title: post.title,
-            path: '/posts/:id',
-            post
+    Post.findById(req.params.id)
+        .populate('comments')
+        .exec(function(err, post) {
+            if(err) {
+                console.log(err);
+            } else {
+                res.render('posts/show', {
+                    title: post.title,
+                    path: '/posts/' + post._id,
+                    post
+                });
+            }
         })
-    }); 
 });
 
 //CREATE post

@@ -1,0 +1,10 @@
+<% include ../partials/header %>
+        <div class="container">
+            <form action="/posts/<%= post._id%>/comments" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment" id="body">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Save" >
+            </form>
+        </div>
+<% include ../partials/footer %>

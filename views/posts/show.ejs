@@ -8,5 +8,13 @@
                         <input type="submit" value="Delete" class="btn btn-danger">
                     </form>
             </div>
+            <hr>
+            <a class="btn btn-success" href="/posts/<%= post._id %>/comments/new">Add comment</a>
+            <div class="comments">
+                <% post.comments.forEach(function(comment) { %>
+                    <span><strong><%= comment.author.username %></strong></span>
+                    <p><%= comment.message %></p>
+                <% }) %>
+            </div>
         </div>
 <% include ../partials/footer %>
