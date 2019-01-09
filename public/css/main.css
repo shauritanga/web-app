@@ -1,12 +1,3 @@
 body{
-    background: url('../images/bg.jpg');
-}
-img {
-    width: 100%;
-}
-.ui{
-    width: 100%;
-}
-.form{
-    width: 100%;
+    background: teal;
 }

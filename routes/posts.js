@@ -5,61 +5,85 @@ const express      = require('express'),
 
 
 router.get('/', function(req, res, next) {
-    res.redirect('/posts')
-});
-
-router.get('/posts', function(req, res, next) {
     Post.find({}).exec(function(err, posts) {
         if(err) {
             const error = new Error('No any post yet!');
             return next(error);
         }
-        res.render('index', {
+        res.render('posts/index', {
             title: 'Home',
             posts
         });
     });
 });
 
-router.get('/posts/new', function(req, res, next) {
-    res.render('new',{ title: 'Create post'})
+router.get('/new', function(req, res, next) {
+    if(req.session && req.session.userId) {
+        res.render('posts/new',{ title: 'Create post'})
+    } else {
+        res.send('you must login to do this');
+    }
 });
-
-router.post('/posts'); 
-
-router.get('/register', function(req, res, next) {
-    res.render('register', {
-        title: 'Sign Up'
-    })
-});
-
-router.post('/register', function(req, res, next) {
-    if(req.body.firstName &&
-        req.body.lastName &&
-        req.body.email &&
-        req.body.password &&
-        req.body.confirm) {
-        if(req.body.password !== req.body.confirm) {
-            return new Error('Passwords do not match')
+//EDIT ROUTE
+router.get('/:id/edit', function(req, res, next) {
+    Post.findById(req.params.id, function(err, post) {
+        if(err) {
+            return res.redirect('/posts/'+ req.params.id);
         }
-        User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password
-        }, function(err, user) {
-            if(err){
-                console.log(err);
-            } else {
-                req.sessionID = user._id;
-                res.redirect('/posts');
-            }
-            console.log(req.sessionID);
+        res.render('posts/edit', {
+            title: 'Edit post',
+            post
         });
-        } else {
-            console.log('All fields are required');
+    });  
+});
+
+//UPDATE
+router.put('/:id', function(req, res, next) {
+    Post.findByIdAndUpdate(req.params.id, req.body.post, function(err, post) {
+        if(err) {
+            return res.redirect('/posts/' + req.params.id);
         }
-})
+        res.redirect('/posts');
+    });
+});
+
+//DESTROY
+router.delete('/:id', function(req, res, next) {
+    Post.findByIdAndRemove(req.params.id, function(err) {
+        if(err) {
+            return res.redirect('/posts');
+        }
+        res.redirect('/posts');
+    });
+});
+
+
+
+//SHOW ROUTE
+router.get('/:id', function(req, res, next) {
+    Post.findById(req.params.id, function(err, post) {
+        if(err) {
+            return res.redirect('/posts')
+        }
+        res.render('posts/show', {
+            title: post.title,
+            post
+        })
+    }); 
+});
+
+//CREATE post
+router.post('/', function(req, res, next) {
+    Post.create(req.body.post, function(err, post) {
+        if(err) {
+            return res.redirect('/posts/new');
+        }
+        post.author.id = req.session.userId._id,
+        post.author.username = req.session.userId.lastName,
+        post.save();
+        res.redirect('/posts');
+    });
+});
 
 
 module.exports = router;

@@ -1,8 +1,10 @@
 const express      = require('express'),
 bodyParser         = require('body-parser'),
 mongoose           = require('mongoose'),
-User               = require('./models/user'),
-routes             = require('./routes/routes'),
+userRoutes         = require('./routes/users'),
+methodOverride     = require('method-override'),
+postRoutes         = require('./routes/posts'),
+commentRoutes      = require('./routes/comments'),
 session            = require('express-session'),
 app                = express(),
 port               = process.env.PORT || 3000;
@@ -17,16 +19,24 @@ app.use(session({
 // PASSPORT CONFIGURATION
 
 //CONFIG APP
+app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 // CONNCTING TO DB
-mongoose.connect('mongodb://localhost:27017/app');
+mongoose.connect('mongodb://localhost:27017/app', {useNewUrlParser: true, useCreateIndex: true});
 
-
+//landing page
+app.get('/', function(req, res) {
+    res.render('index', {
+        title: 'Home'
+    })
+})
 //CONFIG ROUES
-app.use('/', routes);
+app.use('/users', userRoutes);
+app.use('/posts/:id/comments', commentRoutes);
+app.use('/posts', postRoutes);
 
 
 
