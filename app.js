@@ -7,7 +7,8 @@ postRoutes         = require('./routes/posts'),
 commentRoutes      = require('./routes/comments'),
 session            = require('express-session'),
 app                = express(),
-port               = process.env.PORT || 3000;
+port               = process.env.PORT || 3000,
+url                = process.env.DATABASEURL || 'mongodb://localhost:27017/learn_forever';
 
 // CONFIG SESSION
 app.use(session({
@@ -25,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 // CONNCTING TO DB
-mongoose.connect('mongodb://localhost:27017/app', {useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true});
 
 //landing page
 app.get('/', function(req, res) {
@@ -38,7 +39,6 @@ app.get('/', function(req, res) {
 app.use('/users', userRoutes);
 app.use('/posts/:id/comments', commentRoutes);
 app.use('/posts', postRoutes);
-
 
 
 //LISTENING ON PORT
