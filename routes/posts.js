@@ -20,7 +20,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
     if(req.session && req.session.userId) {
-        res.render('posts/new',{ title: 'Create post'})
+        res.render('posts/new',{
+            title: 'Create post',
+            path: '/posts/new'
+        });
     } else {
         res.send('you must login to do this');
     }
