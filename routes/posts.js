@@ -25,7 +25,7 @@ router.get('/new', function(req, res, next) {
             path: '/posts/new'
         });
     } else {
-        res.send('you must login to do this');
+        res.redirect('/users/login');
     }
 });
 //EDIT ROUTE
