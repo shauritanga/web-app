@@ -3,7 +3,7 @@ const express      = require('express'),
       Post         = require('../models/post'),
       router       = express.Router();
 
-
+//GET POSTS
 router.get('/', function(req, res, next) {
     Post.find({}).exec(function(err, posts) {
         if(err) {
@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+//CREATE POST
 router.get('/new', function(req, res, next) {
     if(req.session && req.session.userId) {
         res.render('posts/new',{
@@ -28,6 +29,7 @@ router.get('/new', function(req, res, next) {
         res.redirect('/users/login');
     }
 });
+
 //EDIT ROUTE
 router.get('/:id/edit', function(req, res, next) {
     Post.findById(req.params.id, function(err, post) {
@@ -62,8 +64,6 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-
-
 //SHOW ROUTE
 router.get('/:id', function(req, res, next) {
     Post.findById(req.params.id)
@@ -76,9 +76,9 @@ router.get('/:id', function(req, res, next) {
                     title: post.title,
                     path: '/posts/' + post._id,
                     post
-                });
-            }
-        })
+            });
+        }
+    })
 });
 
 //CREATE post

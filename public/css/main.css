@@ -1,3 +1,10 @@
 #delete{
     display: inline;
 }
+#space {
+    margin-bottom: 2em;
+}
+
+.form {
+    margin-top: 5em;
+}
