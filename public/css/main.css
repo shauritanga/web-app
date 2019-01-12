@@ -15,3 +15,10 @@
     width: 100%;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 800px) {
+    .edit {
+        width: 100%;
+        margin: 5em 3em 0 3em;
+    }
+}
