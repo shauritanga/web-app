@@ -1,6 +1,7 @@
 <% include ../partials/header %>
-        <div class= "edit">
+        <div style="margin-top: 6em;" class="container">
             <form action="/posts/<%= post._id%>/comments" method="POST">
+                <h4>Comment:</h4>
                 <div class="form-group">
                     <input class="form-control" type="text" name="comment" id="body">
                 </div>

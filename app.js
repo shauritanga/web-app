@@ -5,6 +5,7 @@ userRoutes         = require('./routes/users'),
 methodOverride     = require('method-override'),
 postRoutes         = require('./routes/posts'),
 commentRoutes      = require('./routes/comments'),
+path               = require('path'),
 session            = require('express-session'),
 app                = express(),
 port               = process.env.PORT || 3000,
@@ -22,7 +23,7 @@ app.use(session({
 //CONFIG APP
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 // CONNCTING TO DB
