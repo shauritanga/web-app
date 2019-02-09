@@ -61,11 +61,13 @@ router.put('/posts/:id/comments/:comment_id', function(req, res) {
 
 //destroy comment
 router.delete('/posts/:id/comments/:comment_id', function(req, res) {
+    Comment.findById(req.params.comment_id).exec((err, comment) => {
+        if(err) return err;
+        console.log(comment)
+    })
     res.send('removed');
 });
 
 
 
-module.exports = router;
-
-
+module.exports = router
