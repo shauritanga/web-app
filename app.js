@@ -18,7 +18,11 @@ app.use(session({
     saveUninitialized: false
 }));
 
-// PASSPORT CONFIGURATION
+// make user available to all template
+app.use((req, res, next) => {
+    res.locals.currentUser = userId;
+    next();
+})
 
 //CONFIG APP
 app.use(methodOverride('_method'));
