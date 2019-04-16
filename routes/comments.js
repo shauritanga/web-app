@@ -22,9 +22,9 @@ router.get('/posts/:id/comments/new', function(req, res) {
 
 //save comments
 router.post('/posts/:id/comments', function(req, res) {
-    Post.findById(req.params.id, function(err, post) {
-        if(err){
-            console.log(err);
+    if(req.session && req.session.userId) {
+        Post.findById(req.params.id, function(err, post) {
+        if(err) {
             res.redirect('/posts');
         }else {
             Comment.create({message: req.body.comment}, function(err, comment) {
@@ -42,6 +42,10 @@ router.post('/posts/:id/comments', function(req, res) {
             })
         }
     });
+    } else {
+        res.redirect('/users/login');
+    }
+    
 });
 
 //show comments
