@@ -20,6 +20,7 @@
     margin-top: 10em;
 }
 .footer{
+	width:"100%";
 	position: fixed;
 	bottom:20px;
 	color: red;
