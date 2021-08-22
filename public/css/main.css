@@ -19,6 +19,9 @@
     margin: 0 auto;
     margin-top: 10em;
 }
+.footer{
+	color:red
+}
 
 @media screen and (max-width: 800px) {
     .edit {
