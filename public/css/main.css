@@ -22,9 +22,8 @@
 .footer{
 	position: fixed;
 	bottom:0;
-	right:0;
-	lett:0;
-	color:red
+	color:white;
+	background-color:'#ccc';
 }
 
 @media screen and (max-width: 800px) {
