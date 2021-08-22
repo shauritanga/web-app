@@ -21,8 +21,8 @@
 }
 .footer{
 	position: fixed;
-	bottom:20;
-	color: white;
+	bottom:20px;
+	color: red;
 	background-color:'#000';
 }
 
