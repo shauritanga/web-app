@@ -20,6 +20,7 @@
     margin-top: 10em;
 }
 .footer{
+	width:100%;
 	display:flex;
 	align-items:center;
 	position: fixed;
